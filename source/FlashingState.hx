@@ -33,9 +33,9 @@ class FlashingState extends MusicBeatState
 		warnText.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, CENTER);
 		warnText.screenCenter(Y);
 		add(warnText);
-
-		#if android
-		addVirtualPad(NONE, A_B);
+		
+				#if android
+		addVirtualPad(NONE, A_B); // i think this easy aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 		#end
 	}
 

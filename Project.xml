@@ -2,8 +2,7 @@
 <project>
 	<!-- _________________________ Application Settings _________________________ -->
 
-	<app title="Friday Night Funkin': Psych Engine" file="PsychEngine" packageName="com.newbion.psychengine" package="com.newbion.psychengine" main="Main" version="0.2.7" company="ShadowMario" />
-
+	<app title="Friday Night Funkin': The Basement Show" file="The Basement Show" packageName="com.basementteam.tbs" package="com.basementteam.tbs" main="Main" version="0.2.8" company="BasementTeam" />
 	<!--Switch Export with Unique ApplicationID and Icon-->
 	<set name="APP_ID" value="0x0100f6c013bbc000" />
 
@@ -130,7 +129,6 @@
 
 	<!--In case you want to use the addons package-->
 	<haxelib name="flixel-addons" />
-	<haxelib name="hscript" />
 
 	<!--In case you want to use the ui package-->
 	<haxelib name="flixel-ui" />
@@ -139,8 +137,8 @@
 	<!--<haxelib name="polymod"/> -->
 	<haxelib name="discord_rpc" if="desktop"/>
 	<!-- <haxelib name="hxcpp-debug-server" if="desktop"/> -->
-	<haxelib name="extension-webview" if="android"/>
-	<haxelib name="extension-androidtools" if="android"/>
+        <haxelib name='extension-androidtools' if='android' />
+        <haxelib name="hxCodec" if="android"/>
 
 	<!-- <haxelib name="markdown" /> -->
 	<!-- <haxelib name="HtmlParser" /> -->

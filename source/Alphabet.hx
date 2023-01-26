@@ -101,7 +101,17 @@ class Alphabet extends FlxSpriteGroup
 	}
 
 	
-//	public var startPosition:FlxPoint = new FlxPoint(0, 0); //for the calculations
+	public var startPosition:FlxPoint = new FlxPoint(0, 0); //for the calculations
+
+	public function new(x:Float, y:Float, text:String = "", ?bold:Bool = true)
+	{
+		super(x, y);
+
+		this.startPosition.x = x;
+		this.startPosition.y = y;
+		this.bold = bold;
+		this.text = text;
+	}
 
 	public var typingSpeed:Float = 0.05;
 	public function new(x:Float, y:Float, text:String = "", ?bold:Bool = false, typed:Bool = false, ?typingSpeed:Float = 0.05, ?textSize:Float = 1)

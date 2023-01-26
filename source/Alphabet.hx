@@ -25,6 +25,8 @@ class Alphabet extends FlxSpriteGroup
 	public var yMult:Float = 120;
 	public var xAdd:Float = 0;
 	public var yAdd:Float = 0;
+	public var scaleX(default, set):Float = 1;
+	public var scaleY(default, set):Float = 1;	
 	public var isMenuItem:Bool = false;
 	public var textSize:Float = 1.0;
 

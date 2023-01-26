@@ -62,6 +62,10 @@ import DialogueBoxPsych;
 import sys.FileSystem;
 import sys.io.File;
 
+#if VIDEOS_ALLOWED
+import hxcodec.VideoHandler;
+#end
+
 using StringTools;
 
 class PlayState extends MusicBeatState
@@ -236,6 +240,7 @@ class PlayState extends MusicBeatState
 	public var songHits:Int = 0;
 	public var songMisses:Int = 0;
 	public var scoreTxt:FlxText;
+	private var yenbTxt:FlxText;
 	var timeTxt:FlxText;
 	var scoreTxtTween:FlxTween;
 
@@ -817,6 +822,7 @@ class PlayState extends MusicBeatState
 			luaArray.push(new FunkinLua(Paths.lua("scripts/" + "script")));
 		#end
 
+		
 		// STAGE SCRIPTS
 		#if LUA_ALLOWED
 		var doPush:Bool = false;
@@ -1095,6 +1101,12 @@ class PlayState extends MusicBeatState
 		scoreTxt.borderSize = 1.25;
 		scoreTxt.visible = !ClientPrefs.hideHud;
 		add(scoreTxt);
+		
+		yenbTxt = new FlxText(876, 648, 348);
+        yenbTxt.text = "PORT BY YE_NB";
+        yenbTxt.setFormat(Paths.font("vcr.ttf"), 30, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
+        yenbTxt.scrollFactor.set();
+        add(yenbTxt);
 
 		botplayTxt = new FlxText(400, timeBarBG.y + 55, FlxG.width - 800, "BOTPLAY", 32);
 		botplayTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -1390,22 +1402,34 @@ class PlayState extends MusicBeatState
 		char.y += char.positionArray[1];
 	}
 
-	public function startVideo(name:String,?isCutscene:Bool = true):Void {
+	public function startVideo(name:String)
+	{
 		#if VIDEOS_ALLOWED
-		var fileName:String = "assets/videos/" + name;
-    
-/*		var bg:FlxSprite;
-		bg = new FlxSprite(-FlxG.width, -FlxG.height).makeGraphic(FlxG.width * 3, FlxG.height * 3, FlxColor.BLACK);
-		bg.scrollFactor.set();
-		bg.cameras = [camHUD];
-*/		//add(bg);
+		inCutscene = true;
 
-		(new FlxVideo(fileName)).finishCallback = function() {
-//			remove(bg);
+		var filepath:String = Paths.video(name);
+		#if sys
+		if(!FileSystem.exists(filepath))
+		#else
+		if(!OpenFlAssets.exists(filepath))
+		#end
+		{
+			FlxG.log.warn('Couldnt find video file: ' + name);
 			startAndEnd();
+			return;
 		}
-		if (isCutscene)
+
+		var video:VideoHandler = new VideoHandler();
+		video.playVideo(filepath);
+		video.finishCallback = function()
+		{
+			startAndEnd();
+			return;
+		}
+		#else
+		FlxG.log.warn('Platform not supported!');
 		startAndEnd();
+		return;
 		#end
 	}
 
@@ -2687,7 +2711,7 @@ class PlayState extends MusicBeatState
 
 		super.update(elapsed);
 
-		scoreTxt.text = 'Score: ' + songScore + ' | Ported by Newbion | Misses: ' + songMisses + ' | Rating: ' + ratingName;
+		scoreTxt.text = 'Score: ' + songScore + ' | PORT BY YE_NB//NMSLQ | Misses: ' + songMisses + ' | Rating: ' + ratingName;
 		if(ratingName != '?')
 			scoreTxt.text += ' (' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%)' + ' - ' + ratingFC;
 

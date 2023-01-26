@@ -11,6 +11,13 @@ import flash.media.Sound;
 
 using StringTools;
 
+enum Alignment
+{
+	LEFT;
+	CENTERED;
+	RIGHT;
+}
+
 /**
  * Loosley based on FlxTypeText lolol
  */

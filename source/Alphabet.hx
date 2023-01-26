@@ -36,6 +36,8 @@ class Alphabet extends FlxSpriteGroup
 	public var changeX:Bool = true;
 	public var changeY:Bool = true;
 	public var isMenuItem:Bool = false;
+	public var scaleX(default, set):Float = 1;
+	public var scaleY(default, set):Float = 1;
 	public var textSize:Float = 1.0;
 
 	public var text:String = "";
@@ -410,6 +412,43 @@ class Alphabet extends FlxSpriteGroup
 			}
 			finishedText = true;
 		}
+	}
+		private function set_scaleX(value:Float)
+	{
+		if (value == scaleX) return value;
+
+		scale.x = value;
+		for (letter in letters)
+		{
+			if(letter != null)
+			{
+				letter.updateHitbox();
+				//letter.updateLetterOffset();
+				var ratio:Float = (value / letter.spawnScale.x);
+				letter.x = letter.spawnPos.x * ratio;
+			}
+		}
+		scaleX = value;
+		return value;
+	}
+
+	private function set_scaleY(value:Float)
+	{
+		if (value == scaleY) return value;
+
+		scale.y = value;
+		for (letter in letters)
+		{
+			if(letter != null)
+			{
+				letter.updateHitbox();
+				letter.updateLetterOffset();
+				var ratio:Float = (value / letter.spawnScale.y);
+				letter.y = letter.spawnPos.y * ratio;
+			}
+		}
+		scaleY = value;
+		return value;
 	}
 
 	override function update(elapsed:Float)

@@ -47,9 +47,50 @@ class Alphabet extends FlxSpriteGroup
 
 	public var finishedText:Bool = false;
 	public var typed:Bool = false;
-	
-	    
 	public var alignment(default, set):Alignment = LEFT;
+	
+		public function setAlignmentFromString(align:String)
+	{
+		switch(align.toLowerCase().trim())
+		{
+			case 'right':
+				alignment = RIGHT;
+			case 'center' | 'centered':
+				alignment = CENTERED;
+			default:
+				alignment = LEFT;
+		}
+	}
+
+	private function set_alignment(align:Alignment)
+	{
+		alignment = align;
+		updateAlignment();
+		return align;
+	}
+
+	private function updateAlignment()
+	{
+		for (letter in letters)
+		{
+			var newOffset:Float = 0;
+			switch(alignment)
+			{
+				case CENTERED:
+					newOffset = letter.rowWidth / 2;
+				case RIGHT:
+					newOffset = letter.rowWidth;
+				default:
+					newOffset = 0;
+			}
+	
+			letter.offset.x -= letter.alignOffset;
+			letter.offset.x += newOffset;
+			letter.alignOffset = newOffset;
+		}
+	}
+
+	
 	public var startPosition:FlxPoint = new FlxPoint(0, 0); //for the calculations
 
 	public var typingSpeed:Float = 0.05;

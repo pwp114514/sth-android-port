@@ -113,12 +113,8 @@ class Alphabet extends FlxSpriteGroup
 		this.startPosition.y = y;
 		this.bold = bold;
 		this.text = text;
-	}
-
-	public var typingSpeed:Float = 0.05;
-	public function new(x:Float, y:Float, text:String = "", ?bold:Bool = false, typed:Bool = false, ?typingSpeed:Float = 0.05, ?textSize:Float = 1)
-	{
-		super(x, y);
+		
+				super(x, y);
 		forceX = Math.NEGATIVE_INFINITY;
 		this.textSize = textSize;
 
@@ -141,6 +137,8 @@ class Alphabet extends FlxSpriteGroup
 			finishedText = true;
 		}
 	}
+
+	public var typingSpeed:Float = 0.05;
 
 	public function changeText(newText:String, newTypingSpeed:Float = -1)
 	{

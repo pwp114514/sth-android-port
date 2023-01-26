@@ -63,7 +63,7 @@ import sys.FileSystem;
 import sys.io.File;
 
 #if VIDEOS_ALLOWED
-import hxcodec.VideoHandler;
+import VideoHandler;
 #end
 
 using StringTools;

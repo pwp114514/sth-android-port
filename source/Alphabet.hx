@@ -41,7 +41,7 @@ class Alphabet extends FlxSpriteGroup
 
 	// custom shit
 	// amp, backslash, question mark, apostrophy, comma, angry faic, period
-	//var lastSprite:AlphaCharacter;
+	var lastSprite:AlphaCharacter;
 	var xPosResetted:Bool = false;
 
 	var splitWords:Array<String> = [];
@@ -53,8 +53,7 @@ class Alphabet extends FlxSpriteGroup
 	public var typed:Bool = false;
 		public var distancePerItem:FlxPoint = new FlxPoint(20, 120);
 	public var startPosition:FlxPoint = new FlxPoint(0, 0); //for the calculations
-	public var spawnPos:FlxPoint = new FlxPoint();
-	public var spawnScale:FlxPoint = new FlxPoint();
+
 
 	public var typingSpeed:Float = 0.05;
 	public function new(x:Float, y:Float, text:String = "", ?bold:Bool = false, typed:Bool = false, ?typingSpeed:Float = 0.05, ?textSize:Float = 1)
@@ -432,6 +431,8 @@ class AlphaCharacter extends FlxSprite
 	public static var numbers:String = "1234567890";
 
 	public static var symbols:String = "|~#$%()*+-:;<=>@[]^_.,'!?";
+	public var spawnPos:FlxPoint = new FlxPoint();
+	public var spawnScale:FlxPoint = new FlxPoint();
 
 	public var row:Int = 0;
 

@@ -182,7 +182,7 @@ class Alphabet extends FlxSpriteGroup
 				}
 
 				add(letter);
-				lettersArray.push(letter);
+				
 
 				lastSprite = letter;
 			}

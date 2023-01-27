@@ -30,6 +30,7 @@ class Alphabet extends FlxSpriteGroup
 	public var scaleY(default, set):Float = 1;
 	public var isMenuItem:Bool = false;
 	public var textSize:Float = 1.0;
+	public var letters:Array<AlphaCharacter> = [];
 
 	public var text:String = "";
 
@@ -388,22 +389,29 @@ class Alphabet extends FlxSpriteGroup
 		return value;
 	}
 
+
 	override function update(elapsed:Float)
 	{
 		if (isMenuItem)
 		{
-			var scaledY = FlxMath.remapToRange(targetY, 0, 1, 0, 1.3);
-
 			var lerpVal:Float = CoolUtil.boundTo(elapsed * 9.6, 0, 1);
-			y = FlxMath.lerp(y, (scaledY * yMult) + (FlxG.height * 0.48) + yAdd, lerpVal);
-			if(forceX != Math.NEGATIVE_INFINITY) {
-				x = forceX;
-			} else {
-				x = FlxMath.lerp(x, (targetY * 20) + 90 + xAdd, lerpVal);
-			}
+			if(changeX)
+				x = FlxMath.lerp(x, (targetY * distancePerItem.x) + startPosition.x, lerpVal);
+			if(changeY)
+				y = FlxMath.lerp(y, (targetY * 1.3 * distancePerItem.y) + startPosition.y, lerpVal);
 		}
-
 		super.update(elapsed);
+	}
+
+	public function snapToPosition()
+	{
+		if (isMenuItem)
+		{
+			if(changeX)
+				x = (targetY * distancePerItem.x) + startPosition.x;
+			if(changeY)
+				y = (targetY * 1.3 * distancePerItem.y) + startPosition.y;
+		}
 	}
 
 	public function killTheTimer() {

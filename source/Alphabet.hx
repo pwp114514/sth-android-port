@@ -83,14 +83,6 @@ class Alphabet extends FlxSpriteGroup
 	}
 
 	public function changeText(newText:String, newTypingSpeed:Float = -1)
-	{
-		for (i in 0...lettersArray.length) {
-			var letter = lettersArray[0];
-			letter.destroy();
-			remove(letter);
-			lettersArray.remove(letter);
-		}
-		lettersArray = [];
 		splitWords = [];
 		loopNum = 0;
 		xPos = 0;
@@ -433,6 +425,7 @@ class AlphaCharacter extends FlxSprite
 	public static var symbols:String = "|~#$%()*+-:;<=>@[]^_.,'!?";
 	public var spawnPos:FlxPoint = new FlxPoint();
 	public var spawnScale:FlxPoint = new FlxPoint();
+	public var letterOffset:Array<Float> = [0, 0];
 
 	public var row:Int = 0;
 
@@ -568,5 +561,15 @@ class AlphaCharacter extends FlxSprite
 				//x -= 35 - (90 * (1.0 - textSize));
 				y -= 16;
 		}
+		
+	public function updateLetterOffset()
+	{
+		if (animation.curAnim == null) return;
+
+		if(!animation.curAnim.name.endsWith('bold'))
+		{
+			offset.y += -(110 - height);
+		}
 	}
 }
+

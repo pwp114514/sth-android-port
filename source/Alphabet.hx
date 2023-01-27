@@ -83,6 +83,7 @@ class Alphabet extends FlxSpriteGroup
 	}
 
 	public function changeText(newText:String, newTypingSpeed:Float = -1)
+	{
 		splitWords = [];
 		loopNum = 0;
 		xPos = 0;
